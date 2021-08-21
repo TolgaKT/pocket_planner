@@ -13,7 +13,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -39,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
                   width: 600,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Color(0xff3d3b3b)),
+                      color: kBackgroundColor),
                   child: Column(
                     children: [
                       MenuButton(

@@ -31,6 +31,7 @@ dependencies:
   provider: ^5.0.0
   flutter_slidable: ^0.6.0
   flutter_material_color_picker: ^1.1.0+2
+  persistent_bottom_nav_bar: ^4.0.2
 
 
 dev_dependencies:

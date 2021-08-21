@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_planner/controllers/home_controller.dart';
 import 'package:pocket_planner/models/class_data/label_data.dart';
 import 'package:pocket_planner/models/class_data/task_data.dart';
-import 'package:pocket_planner/views/dashboard.dart';
 import 'package:provider/provider.dart';
 
 import 'models/class_data/project_data.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        home: Dashboard(),
+        home: HomeController(),
       ),
     );
   }

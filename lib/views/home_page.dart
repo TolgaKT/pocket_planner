@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
               });
         },
       ),
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.black,
       body: SafeArea(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

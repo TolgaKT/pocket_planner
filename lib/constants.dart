@@ -12,6 +12,8 @@ const kMainYellow = Color(0xfff0ab3c);
 
 const kLightBlue = Color(0xff55bff0);
 
+const kUltraLightBlue = Color(0xff7acbf0);
+
 const kMainBlue = Color(0xff327af5);
 
 const kDarkBlue = Color(0xff28287d);
@@ -34,7 +36,7 @@ const kMainRed = Color(0xffE03616);
 
 const kMainWhite = Color(0xffffffff);
 
-const kMainGradient = [kLightBlue, kMainBlue];
+const kMainGradient = [Color(0xff00cbbf), Color(0xff00e2d4)];
 
 const kTitleStyle = TextStyle(
     color: kMainWhite, fontFamily: 'OpenSans', fontWeight: FontWeight.w700);

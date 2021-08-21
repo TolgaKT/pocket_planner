@@ -39,16 +39,8 @@ class TaskTile extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-          height: 45,
+          height: 50,
           decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: kDarkCyan,
-                  spreadRadius: .2,
-                  blurRadius: .2,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
               borderRadius: BorderRadius.circular(12),
               gradient: LinearGradient(
                   begin: Alignment.centerRight,

@@ -19,7 +19,7 @@ class _TaskListState extends State<TaskList> {
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) {
               return SizedBox(
-                height: 20,
+                height: 15,
               );
             },
             itemCount: projectData.projectsCount,
