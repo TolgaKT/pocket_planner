@@ -24,7 +24,7 @@ const kMainPurple = Color(0xff9c6eeb);
 
 const kDarkPurple = Color(0xff6464d2);
 
-const kGray = Color(0xff5a6487);
+const kGrey = Color(0xff5a6487);
 
 const kBackgroundColor = Color(0xff292929);
 

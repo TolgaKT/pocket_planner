@@ -6,11 +6,13 @@ class RoundedButton extends StatelessWidget {
   final Function onPressed;
   final double height;
   final double width;
+  final double radius;
 
   RoundedButton(
       {this.buttonChild,
       this.buttonColor,
       this.onPressed,
+      this.radius = 18,
       this.width = 50,
       this.height = 50});
 
@@ -24,7 +26,7 @@ class RoundedButton extends StatelessWidget {
             elevation: 20,
             primary: buttonColor,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18))),
+                borderRadius: BorderRadius.circular(radius))),
         onPressed: onPressed,
         child: Center(child: buttonChild),
       ),

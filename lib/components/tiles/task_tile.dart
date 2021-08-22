@@ -39,41 +39,61 @@ class TaskTile extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-          height: 50,
+          height: 120,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.centerLeft,
-                  colors: kMainGradient)),
+              borderRadius: BorderRadius.circular(12), color: Colors.white),
           child: Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  task.taskName,
-                  style: kTitleStyle.copyWith(fontSize: 18),
-                ),
-                task.label != null
-                    ? Container(
-                        child: Center(
-                          child: Text(
-                            task.label.labelName,
-                            style: kSubTitleStyle,
+              padding: const EdgeInsets.only(
+                  right: 20.0, left: 20, top: 15, bottom: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    task.label.labelName,
+                    style: kSubTitleStyle.copyWith(
+                        color: task.label.labelColor, fontSize: 16),
+                  ),
+                  Divider(
+                    thickness: 1.5,
+                    color: kGrey.withOpacity(.2),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Container(
+                            height: 37,
+                            width: 3,
+                            decoration: BoxDecoration(
+                                color: task.label.labelColor,
+                                borderRadius: BorderRadius.circular(12)),
                           ),
                         ),
-                        height: 30,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: task.label.labelColor,
-                            borderRadius: BorderRadius.circular(15)),
-                      )
-                    : Container()
-              ],
-            ),
-          )),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              task.taskName,
+                              style: kTitleStyle.copyWith(
+                                  color: Colors.black, fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              task.taskDesc,
+                              style: kSubTitleStyle.copyWith(
+                                  color: kGrey, fontSize: 14),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ))),
     );
   }
 }

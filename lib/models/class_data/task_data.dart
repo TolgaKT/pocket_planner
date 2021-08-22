@@ -11,31 +11,14 @@ class TaskData extends ChangeNotifier {
         projectId: 1,
         label: Label(labelName: 'Urgent', labelColor: kMainRed),
         status: TaskStatus.pending,
+        taskDesc: 'Work on design of the app',
         taskName: 'UI Design'),
     Task(
-      projectId: 1,
-      status: TaskStatus.pending,
-      taskName: 'UI Design',
-      label: Label(labelName: 'Shopping', labelColor: kMainYellow),
-    ),
-    Task(
-      projectId: 1,
-      status: TaskStatus.pending,
-      taskName: 'UI Design',
-      label: Label(labelName: 'Urgent', labelColor: kMainBlue),
-    ),
-    Task(
-      projectId: 1,
-      status: TaskStatus.pending,
-      taskName: 'UI Design',
-      label: Label(labelName: 'Urgent', labelColor: kMainRed),
-    ),
-    Task(
-      projectId: 1,
-      status: TaskStatus.pending,
-      taskName: 'UI Design',
-      label: Label(labelName: 'Urgent', labelColor: kMainRed),
-    ),
+        projectId: 1,
+        label: Label(labelName: 'Urgent', labelColor: kMainRed),
+        status: TaskStatus.pending,
+        taskDesc: 'Work on design of the app',
+        taskName: 'UI Design'),
   ];
 
   UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks
