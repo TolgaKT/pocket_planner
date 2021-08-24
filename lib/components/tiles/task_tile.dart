@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pocket_planner/controllers/task_controller.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
+import 'package:pocket_planner/views/edit_task_screen.dart';
 
 import '../../constants.dart';
 
@@ -15,27 +17,44 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      secondaryActions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.delete),
-          onPressed: () {
-            TaskController.deleteTask(task, context);
-          },
-          color: kColorMap['kMainRed'],
-        ),
-        IconButton(
-          icon: Icon(Icons.edit),
-          onPressed: () {},
-          color: kColorMap['kMainYellow'],
-        ),
-        IconButton(
-          icon: Icon(Icons.check),
-          onPressed: () {
-            TaskController.markAsComplete(task, context);
-          },
-          color: kColorMap['kMainCyan'],
-        ),
-      ],
+      secondaryActions: task.status == TaskStatus.pending
+          ? <Widget>[
+              IconButton(
+                icon: FaIcon(FontAwesomeIcons.trash),
+                onPressed: () {
+                  TaskController.deleteTask(task, context);
+                },
+                color: kColorMap['kMainRed'],
+              ),
+              IconButton(
+                icon: FaIcon(FontAwesomeIcons.edit),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditTaskScreen(
+                                task: task,
+                              )));
+                },
+                color: kColorMap['kMainYellow'],
+              ),
+              IconButton(
+                icon: FaIcon(FontAwesomeIcons.check),
+                onPressed: () {
+                  TaskController.markAsComplete(task, context);
+                },
+                color: kColorMap['kMainCyan'],
+              ),
+            ]
+          : <Widget>[
+              IconButton(
+                icon: FaIcon(FontAwesomeIcons.undo),
+                onPressed: () {
+                  TaskController.undoFinished(task, context);
+                },
+                color: kColorMap['kMainYellow'],
+              ),
+            ],
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(

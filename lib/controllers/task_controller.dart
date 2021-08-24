@@ -12,8 +12,12 @@ class TaskController {
     Provider.of<TaskData>(context, listen: false).deleteTask(task);
   }
 
-  static void editTask(Task task, String edit, BuildContext context) {
-    Provider.of<TaskData>(context, listen: false).editTask(task, edit);
+  static void editTask(Task task, Task newTask, BuildContext context) {
+    Provider.of<TaskData>(context, listen: false).editTask(task, newTask);
+  }
+
+  static void undoFinished(Task task, BuildContext context) {
+    Provider.of<TaskData>(context, listen: false).undoFinished(task);
   }
 
   static void markAsComplete(Task task, BuildContext context) {
