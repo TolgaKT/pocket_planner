@@ -21,19 +21,19 @@ class TaskTile extends StatelessWidget {
           onPressed: () {
             TaskController.deleteTask(task, context);
           },
-          color: kMainRed,
+          color: kColorMap['kMainRed'],
         ),
         IconButton(
           icon: Icon(Icons.edit),
           onPressed: () {},
-          color: kMainYellow,
+          color: kColorMap['kMainYellow'],
         ),
         IconButton(
           icon: Icon(Icons.check),
           onPressed: () {
             TaskController.markAsComplete(task, context);
           },
-          color: kMainCyan,
+          color: kColorMap['kMainCyan'],
         ),
       ],
       actionPane: SlidableDrawerActionPane(),
@@ -48,14 +48,16 @@ class TaskTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    task.label.labelName,
-                    style: kSubTitleStyle.copyWith(
-                        color: task.label.labelColor, fontSize: 16),
-                  ),
+                  task.label != null
+                      ? Text(
+                          task.label.labelName,
+                          style: kSubTitleStyle.copyWith(
+                              color: task.label.labelColor, fontSize: 16),
+                        )
+                      : Container(),
                   Divider(
                     thickness: 1.5,
-                    color: kGrey.withOpacity(.2),
+                    color: kColorMap['kGrey'].withOpacity(.2),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
@@ -67,7 +69,9 @@ class TaskTile extends StatelessWidget {
                             height: 37,
                             width: 3,
                             decoration: BoxDecoration(
-                                color: task.label.labelColor,
+                                color: task.label != null
+                                    ? task.label.labelColor
+                                    : kColorMap['kGrey'],
                                 borderRadius: BorderRadius.circular(12)),
                           ),
                         ),
@@ -85,7 +89,7 @@ class TaskTile extends StatelessWidget {
                             Text(
                               task.taskDesc,
                               style: kSubTitleStyle.copyWith(
-                                  color: kGrey, fontSize: 14),
+                                  color: kColorMap['kGrey'], fontSize: 14),
                             ),
                           ],
                         )

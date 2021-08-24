@@ -5,6 +5,10 @@ import 'package:pocket_planner/models/class_models/task_model.dart';
 import 'package:provider/provider.dart';
 
 class TaskList extends StatefulWidget {
+  final DateTime selectedDate;
+
+  TaskList({this.selectedDate});
+
   @override
   _TaskListState createState() => _TaskListState();
 }
@@ -13,7 +17,7 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
-      builder: (context, projectData, child) {
+      builder: (context, taskData, child) {
         return Padding(
           padding: EdgeInsets.only(left: 20, right: 20),
           child: ListView.separated(
@@ -22,9 +26,9 @@ class _TaskListState extends State<TaskList> {
                 height: 15,
               );
             },
-            itemCount: projectData.projectsCount,
+            itemCount: taskData.getTaskCount(widget.selectedDate),
             itemBuilder: (context, index) {
-              Task task = projectData.tasks[index];
+              Task task = taskData.getTasks(widget.selectedDate)[index];
               return TaskTile(
                 task: task,
               );

@@ -141,120 +141,128 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       selectedDate = date;
       dateTitle = '${months[date.month - 1]}, ${date.year}';
     });
+    print(selectedDate);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 550,
-        width: 400,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RoundedButton(
-                    buttonColor: Colors.white,
-                    buttonChild: Icon(
-                      Icons.arrow_back_ios_outlined,
-                      color: Colors.black,
+    return Scaffold(
+      body: Container(
+          height: 550,
+          width: 400,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      buttonColor: Colors.white,
+                      buttonChild: Icon(
+                        Icons.arrow_back_ios_outlined,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        changeMonth(false);
+                      },
                     ),
-                    onPressed: () {
-                      changeMonth(false);
-                    },
-                  ),
-                  SizedBox(
-                    width: 65,
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: 140, maxWidth: 140),
-                    child: Center(
-                      child: Text(
-                        dateTitle,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                    SizedBox(
+                      width: 65,
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: 140, maxWidth: 140),
+                      child: Center(
+                        child: Text(
+                          dateTitle,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 65,
-                  ),
-                  RoundedButton(
-                    buttonColor: Colors.white,
-                    buttonChild: Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      color: Colors.black,
+                    SizedBox(
+                      width: 65,
                     ),
-                    onPressed: () {
-                      changeMonth(true);
-                    },
-                  ),
-                ],
+                    RoundedButton(
+                      buttonColor: Colors.white,
+                      buttonChild: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        changeMonth(true);
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: days
-                    .map((e) => ConstrainedBox(
-                          constraints:
-                              BoxConstraints(minWidth: 25, maxWidth: 25),
-                          child: Center(
-                            child: Text(
-                              e,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w600),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: days
+                      .map((e) => ConstrainedBox(
+                            constraints:
+                                BoxConstraints(minWidth: 25, maxWidth: 25),
+                            child: Center(
+                              child: Text(
+                                e,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
-                          ),
-                        ))
-                    .toList()),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: _DayPickerGridDelegate(),
-                    itemCount: getDaysInMonth(date.year, date.month) +
-                        calculateEmptyContainers(),
-                    itemBuilder: buildDates(calculateEmptyContainers())),
+                          ))
+                      .toList()),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: _DayPickerGridDelegate(),
+                      itemCount: getDaysInMonth(date.year, date.month) +
+                          calculateEmptyContainers(),
+                      itemBuilder: buildDates(calculateEmptyContainers())),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RoundedButton(
-                    buttonColor: Colors.grey,
-                    onPressed: () {},
-                    buttonChild: Text('Cancel'),
-                    height: 50,
-                    width: 140,
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  RoundedButton(
-                    buttonColor: Colors.blueAccent,
-                    onPressed: () {},
-                    buttonChild: Text('Okay'),
-                    height: 50,
-                    width: 140,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ));
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      buttonColor: Colors.grey,
+                      onPressed: () {
+                        Navigator.pop(context, null);
+                      },
+                      buttonChild: Text('Cancel'),
+                      height: 50,
+                      width: 140,
+                    ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    RoundedButton(
+                      buttonColor: Colors.blueAccent,
+                      onPressed: () {
+                        print(selectedDate);
+                        Navigator.pop(context, selectedDate);
+                      },
+                      buttonChild: Text('Okay'),
+                      height: 50,
+                      width: 140,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
   }
 }

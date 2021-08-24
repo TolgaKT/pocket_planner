@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_planner/components/label_adder.dart';
+import 'package:pocket_planner/components/label_creator.dart';
 import 'package:pocket_planner/components/lists/label_list.dart';
 import 'package:pocket_planner/components/menu_button.dart';
 import 'package:pocket_planner/constants.dart';
@@ -39,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
                   width: 600,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: kBackgroundColor),
+                      color: kColorMap['kBackgroundColor']),
                   child: Column(
                     children: [
                       MenuButton(
@@ -49,7 +49,7 @@ class _DashboardState extends State<Dashboard> {
                           size: 20,
                         ),
                         buttonText: 'Calendar',
-                        iconBgColor: kMainBlue,
+                        iconBgColor: kColorMap['kMainBlue'],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -65,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
                           size: 20,
                         ),
                         buttonText: 'Habits',
-                        iconBgColor: kMainYellow,
+                        iconBgColor: kColorMap['kMainYellow'],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -81,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
                           size: 20,
                         ),
                         buttonText: 'Statistics',
-                        iconBgColor: kMainRed,
+                        iconBgColor: kColorMap['kMainRed'],
                       ),
                     ],
                   ),
@@ -100,11 +100,17 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         TextButton(
                             onPressed: () {
-                              showModalBottomSheet(
-                                  backgroundColor: Colors.white.withOpacity(0),
+                              showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return LabelAdder();
+                                    return ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxHeight: 400,
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width,
+                                      ),
+                                      child: LabelCreator(),
+                                    );
                                   });
                             },
                             child: Text(

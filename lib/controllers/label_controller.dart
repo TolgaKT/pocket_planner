@@ -8,7 +8,23 @@ class LabelController {
     Provider.of<LabelData>(context, listen: false).addLabel(label);
   }
 
-  static void deleteTask(Label label, BuildContext context) {
+  static void deleteLabel(Label label, BuildContext context) {
     Provider.of<LabelData>(context, listen: false).deleteLabel(label);
+  }
+
+  static void selectLabel(Label label, BuildContext context) {
+    Provider.of<LabelData>(context, listen: false).selectLabel(label);
+  }
+
+  static void removeSelection(BuildContext context) {
+    Provider.of<LabelData>(context, listen: false).removeSelection();
+  }
+
+  static Label getSelectedLabel(BuildContext context) {
+    return Provider.of<LabelData>(context, listen: false).selectedLabel;
+  }
+
+  static int getLabelCount(BuildContext context) {
+    return Provider.of<LabelData>(context, listen: false).labelCount;
   }
 }

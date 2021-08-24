@@ -11,20 +11,14 @@ class ProjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 45,
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: kMainBlue,
-                spreadRadius: .2,
-                blurRadius: .2,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-            borderRadius: BorderRadius.circular(12),
-            gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: kMainGradient)),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: kColorMap['kMainBlue'],
+            spreadRadius: .2,
+            blurRadius: .2,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ], borderRadius: BorderRadius.circular(12), color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.only(right: 20.0, left: 20),
           child: Row(

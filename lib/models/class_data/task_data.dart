@@ -1,32 +1,26 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:pocket_planner/constants.dart';
-import 'package:pocket_planner/models/class_models/label_model.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 
 class TaskData extends ChangeNotifier {
-  List<Task> _tasks = [
-    Task(
-        projectId: 1,
-        label: Label(labelName: 'Urgent', labelColor: kMainRed),
-        status: TaskStatus.pending,
-        taskDesc: 'Work on design of the app',
-        taskName: 'UI Design'),
-    Task(
-        projectId: 1,
-        label: Label(labelName: 'Urgent', labelColor: kMainRed),
-        status: TaskStatus.pending,
-        taskDesc: 'Work on design of the app',
-        taskName: 'UI Design'),
-  ];
+  List<Task> _tasks = [];
 
-  UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks
-      .where((element) => element.status != TaskStatus.finished)
-      .toList());
+  UnmodifiableListView<Task> getTasks(DateTime selectedDate) {
+    return UnmodifiableListView(_tasks
+        .where((element) =>
+            element.status != TaskStatus.finished &&
+            element.dueDate == selectedDate)
+        .toList());
+  }
 
-  int get projectsCount =>
-      _tasks.where((element) => element.status != TaskStatus.finished).length;
+  int getTaskCount(DateTime selectedDate) {
+    return _tasks
+        .where((element) =>
+            element.status != TaskStatus.finished &&
+            element.dueDate == selectedDate)
+        .length;
+  }
 
   void addTask(Task task) {
     _tasks.add(task);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pocket_planner/constants.dart';
+import 'package:pocket_planner/controllers/label_controller.dart';
 import 'package:pocket_planner/models/class_models/label_model.dart';
 
 class LabelTile extends StatelessWidget {
@@ -9,8 +11,18 @@ class LabelTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      secondaryActions: [
+        IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            LabelController.deleteLabel(label, context);
+          },
+          color: kColorMap['kMainRed'],
+        ),
+      ],
       child: Column(
         children: [
           Container(
@@ -27,7 +39,7 @@ class LabelTile extends StatelessWidget {
                         color: label.labelColor, shape: BoxShape.circle),
                     child: Icon(
                       Icons.label,
-                      color: kMainWhite,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
