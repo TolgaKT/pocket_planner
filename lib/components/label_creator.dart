@@ -11,7 +11,7 @@ class LabelCreator extends StatefulWidget {
 
 class _LabelCreatorState extends State<LabelCreator> {
   FocusNode _nameNode;
-  Color selectedColor = kColorMap['kGrey'];
+  Color selectedColor = kLabelMap['kMainPink'];
   TextEditingController _nameController = TextEditingController();
 
   @override
@@ -89,23 +89,23 @@ class _LabelCreatorState extends State<LabelCreator> {
                             (MediaQuery.of(context).size.height / 2),
                         crossAxisCount: 5,
                         crossAxisSpacing: 15),
-                    itemCount: kColorMap.length,
+                    itemCount: kLabelMap.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            selectedColor = kColorMap.values.toList()[index];
+                            selectedColor = kLabelMap.values.toList()[index];
                           });
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               border: selectedColor ==
-                                      kColorMap.values.toList()[index]
+                                      kLabelMap.values.toList()[index]
                                   ? Border.all(color: Colors.black, width: 3)
                                   : Border.all(
-                                      color: kColorMap.values.toList()[index]),
+                                      color: kLabelMap.values.toList()[index]),
                               shape: BoxShape.circle,
-                              color: kColorMap.values.toList()[index]),
+                              color: kLabelMap.values.toList()[index]),
                         ),
                       );
                     }),

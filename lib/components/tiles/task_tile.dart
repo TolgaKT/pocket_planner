@@ -9,19 +9,22 @@ import '../../constants.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
-
   TaskTile({
     this.task,
   });
 
   @override
   Widget build(BuildContext context) {
+    SlidableController controller = SlidableController();
     return Slidable(
+      controller: controller,
+      closeOnScroll: true,
       secondaryActions: task.status == TaskStatus.pending
           ? <Widget>[
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.trash),
                 onPressed: () {
+                  controller.activeState.close();
                   TaskController.deleteTask(task, context);
                 },
                 color: kColorMap['kMainRed'],
@@ -29,6 +32,7 @@ class TaskTile extends StatelessWidget {
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.edit),
                 onPressed: () {
+                  controller.activeState.close();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -41,6 +45,7 @@ class TaskTile extends StatelessWidget {
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.check),
                 onPressed: () {
+                  controller.activeState.close();
                   TaskController.markAsComplete(task, context);
                 },
                 color: kColorMap['kMainCyan'],
@@ -50,6 +55,7 @@ class TaskTile extends StatelessWidget {
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.undo),
                 onPressed: () {
+                  controller.activeState.close();
                   TaskController.undoFinished(task, context);
                 },
                 color: kColorMap['kMainYellow'],

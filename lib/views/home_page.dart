@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/components/lists/task_list.dart';
 import 'package:pocket_planner/components/rounded_button.dart';
+import 'package:pocket_planner/components/top_calendar.dart';
 import 'package:pocket_planner/constants.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 import 'package:pocket_planner/views/add_task_screen.dart';
-import 'package:pocket_planner/views/dashboard.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +16,12 @@ class _HomePageState extends State<HomePage> {
   List<TaskStatus> statusList = [TaskStatus.pending, TaskStatus.finished];
   int selectedStatusIndex = 0;
 
+  void _updateDate(DateTime newDate) {
+    setState(() {
+      selectedDate = newDate;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,33 +30,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.dashboard_rounded,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Dashboard()));
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
           Padding(
-              padding: const EdgeInsets.only(
-                  left: 20.0, top: 20, bottom: 20, right: 20),
-              child: Text(
-                'Today',
-                style: kTitleStyle.copyWith(fontSize: 26, color: Colors.black),
+              padding: const EdgeInsets.only(bottom: 15.0),
+              child: TopCalendar(
+                parentAction: _updateDate,
               )),
           Expanded(
               child: TaskList(
