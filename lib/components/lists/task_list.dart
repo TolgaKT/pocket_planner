@@ -6,9 +6,10 @@ import 'package:provider/provider.dart';
 
 class TaskList extends StatefulWidget {
   final DateTime selectedDate;
-  final TaskStatus selectedStatus;
 
-  TaskList({this.selectedDate, this.selectedStatus});
+  TaskList({
+    this.selectedDate,
+  });
 
   @override
   _TaskListState createState() => _TaskListState();
@@ -27,11 +28,9 @@ class _TaskListState extends State<TaskList> {
                 height: 15,
               );
             },
-            itemCount: taskData.getTaskCount(
-                widget.selectedDate, widget.selectedStatus),
+            itemCount: taskData.getTaskCount(widget.selectedDate),
             itemBuilder: (context, index) {
-              Task task = taskData.getTasks(
-                  widget.selectedDate, widget.selectedStatus)[index];
+              Task task = taskData.getTasks(widget.selectedDate)[index];
               return TaskTile(
                 task: task,
               );

@@ -6,19 +6,13 @@ import 'package:pocket_planner/models/class_models/task_model.dart';
 class TaskData extends ChangeNotifier {
   List<Task> _tasks = [];
 
-  UnmodifiableListView<Task> getTasks(
-      DateTime selectedDate, TaskStatus status) {
-    return UnmodifiableListView(_tasks
-        .where((element) =>
-            element.status == status && element.dueDate == selectedDate)
-        .toList());
+  UnmodifiableListView<Task> getTasks(DateTime selectedDate) {
+    return UnmodifiableListView(
+        _tasks.where((element) => element.dueDate == selectedDate).toList());
   }
 
-  int getTaskCount(DateTime selectedDate, TaskStatus status) {
-    return _tasks
-        .where((element) =>
-            element.status == status && element.dueDate == selectedDate)
-        .length;
+  int getTaskCount(DateTime selectedDate) {
+    return _tasks.where((element) => element.dueDate == selectedDate).length;
   }
 
   void addTask(Task task) {
@@ -32,11 +26,11 @@ class TaskData extends ChangeNotifier {
     if (newTask.taskName != null) {
       foundTask.taskName = newTask.taskName;
     }
-    if (newTask.taskDesc != null) {
-      foundTask.taskDesc = newTask.taskDesc;
-    }
     if (newTask.dueDate != null) {
       foundTask.dueDate = newTask.dueDate;
+    }
+    if (newTask.taskDesc != null) {
+      foundTask.taskDesc = newTask.taskDesc;
     }
     foundTask.label = newTask.label;
     notifyListeners();

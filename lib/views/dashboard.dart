@@ -119,13 +119,7 @@ class _DashboardState extends State<Dashboard> {
                             ))
                       ],
                     )),
-                Container(
-                  width: 600,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Color(0xff3d3b3b)),
-                  child: LabelList(),
-                ),
+                LabelList(),
               ],
             ),
           ),

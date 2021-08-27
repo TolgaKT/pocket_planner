@@ -21,28 +21,18 @@ class MiniLabelTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 10),
         decoration: BoxDecoration(
-            color: LabelController.getSelectedLabel(context) == label
-                ? Colors.white54
-                : kColorMap['kBackgroundColor'],
+            border: Border.all(
+                width: 2,
+                color: LabelController.getSelectedLabel(context) == label
+                    ? Colors.black
+                    : kColorMap['kMainWhite']),
+            color: label.labelColor.withOpacity(.5),
             borderRadius: BorderRadius.circular(15)),
-        child: Row(
-          children: [
-            Container(
-              height: 12,
-              width: 12,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: label.labelColor,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text(
-                label.labelName,
-                style: kSubTitleStyle,
-              ),
-            )
-          ],
+        child: Center(
+          child: Text(
+            label.labelName,
+            style: kSubTitleStyle,
+          ),
         ),
       ),
     );

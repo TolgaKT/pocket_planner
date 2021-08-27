@@ -58,62 +58,83 @@ class TaskTile extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-          height: 120,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12), color: Colors.white),
+              borderRadius: BorderRadius.circular(16),
+              color: task.label != null
+                  ? task.label.labelColor.withOpacity(.4)
+                  : kColorMap['kGrey'].withOpacity(.4)),
           child: Padding(
               padding: const EdgeInsets.only(
                   right: 20.0, left: 20, top: 15, bottom: 15),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  task.label != null
-                      ? Text(
-                          task.label.labelName,
-                          style: kSubTitleStyle.copyWith(
-                              color: task.label.labelColor, fontSize: 16),
-                        )
-                      : Container(),
-                  Divider(
-                    thickness: 1.5,
-                    color: kColorMap['kGrey'].withOpacity(.2),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Container(
-                            height: 37,
-                            width: 3,
-                            decoration: BoxDecoration(
-                                color: task.label != null
-                                    ? task.label.labelColor
-                                    : kColorMap['kGrey'],
-                                borderRadius: BorderRadius.circular(12)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            task.taskName,
+                            style: kTitleStyle.copyWith(
+                                color: Colors.black, fontSize: 18),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              task.taskName,
-                              style: kTitleStyle.copyWith(
-                                  color: Colors.black, fontSize: 18),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              task.taskDesc,
-                              style: kSubTitleStyle.copyWith(
-                                  color: kColorMap['kGrey'], fontSize: 14),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                          task.status == TaskStatus.pending
+                              ? Container()
+                              : FaIcon(
+                                  FontAwesomeIcons.solidCheckCircle,
+                                  color: Colors.greenAccent,
+                                ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        task.taskDesc,
+                        style: kSubTitleStyle.copyWith(
+                            color: kColorMap['kGrey'], fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Divider(
+                        thickness: 1.5,
+                        color: kColorMap['kGrey'].withOpacity(.2),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.clock),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(task.taskTime.format(context)),
+                            ],
+                          ),
+                          task.label != null
+                              ? Container(
+                                  height: 40,
+                                  width: 80,
+                                  child: Center(
+                                    child: Text(
+                                      task.label.labelName,
+                                      style: kSubTitleStyle,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: task.label.labelColor,
+                                      borderRadius: BorderRadius.circular(15)),
+                                )
+                              : Container()
+                        ],
+                      )
+                    ],
                   ),
                 ],
               ))),

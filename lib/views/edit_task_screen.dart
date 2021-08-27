@@ -1,7 +1,9 @@
+import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:pocket_planner/components/custom_date_picker.dart';
+import 'package:pocket_planner/components/custom_text_field.dart';
 import 'package:pocket_planner/components/lists/mini_label_list.dart';
 import 'package:pocket_planner/components/rounded_button.dart';
 import 'package:pocket_planner/constants.dart';
@@ -22,10 +24,11 @@ class EditTaskScreen extends StatefulWidget {
 class _EditTaskScreenState extends State<EditTaskScreen> {
   FocusNode _nameNode;
   TextEditingController _nameController = TextEditingController();
-  FocusNode _descriptionNode;
-  TextEditingController _descriptionController = TextEditingController();
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate;
   Label selectedLabel;
+  TextEditingController _descriptionController = TextEditingController();
+  FocusNode _descriptionNode;
+  TimeOfDay selectedTime;
 
   @override
   void initState() {
@@ -33,26 +36,56 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     super.initState();
     _nameController.addListener(() {});
     _nameNode = FocusNode();
-    _descriptionNode = FocusNode();
     _descriptionController.addListener(() {});
+    _descriptionNode = FocusNode();
     _nameController.text = widget.task.taskName;
     _descriptionController.text = widget.task.taskDesc;
+    setState(() {
+      selectedDate = widget.task.dueDate;
+      selectedTime = widget.task.taskTime;
+    });
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _descriptionController.dispose();
     _nameController.dispose();
     _nameNode.dispose();
     _descriptionNode.dispose();
+    _descriptionController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kColorMap['kMainWhite'],
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.times,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              })
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: kColorMap['kGrey'].withOpacity(.4),
+            height: 1.0,
+          ),
+        ),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: kColorMap['kMainWhite'],
+        title: Text(
+          'Edit Task',
+          style: kTitleStyle.copyWith(color: Colors.black),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -61,119 +94,141 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Edit Task',
-                  style: kTitleStyle.copyWith(fontSize: 26),
-                ),
-                SizedBox(
-                  height: 55,
-                ),
-                Text(
-                  'TASK NAME',
-                  style: kSubTitleStyle.copyWith(fontSize: 15),
+                  'TASK TITLE',
+                  style: kSubTitleStyle.copyWith(
+                      fontSize: 15, color: Colors.black),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    hintStyle: TextStyle(fontSize: 16.0, color: Colors.white),
-                  ),
-                  focusNode: _nameNode,
-                  style: TextStyle(color: Colors.white),
-                ),
+                CustomTextField(node: _nameNode, controller: _nameController),
                 SizedBox(
                   height: 35,
                 ),
                 Text(
                   'TASK DESCRIPTION',
-                  style: kSubTitleStyle.copyWith(fontSize: 15),
+                  style: kSubTitleStyle.copyWith(
+                      fontSize: 15, color: Colors.black),
                 ),
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: kColorMap['kGrey']),
-                    ),
-                    hintStyle: TextStyle(fontSize: 16.0, color: Colors.white),
-                  ),
-                  focusNode: _descriptionNode,
-                  style: TextStyle(color: Colors.white),
-                ),
+                CustomTextField(
+                    node: _descriptionNode, controller: _descriptionController),
                 SizedBox(
                   height: 35,
                 ),
-                Text(
-                  'DUE DATE',
-                  style: kSubTitleStyle.copyWith(fontSize: 15),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom:
-                            BorderSide(width: 1.0, color: kColorMap['kGrey']),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          DateFormat('dd-MM-yyyy').format(selectedDate),
-                          style: kSubTitleStyle,
+                          'TASK DATE',
+                          style: kSubTitleStyle.copyWith(
+                              fontSize: 15, color: Colors.black),
                         ),
-                        IconButton(
-                            icon: FaIcon(
-                              FontAwesomeIcons.calendar,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return CustomDatePicker();
-                                  }).then((value) {
-                                setState(() {
-                                  if (value != null) {
-                                    selectedDate = value;
-                                  }
-                                });
-                              });
-                            }),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            width: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Colors.black)),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    DateFormat('dd-MM-yyyy')
+                                        .format(selectedDate),
+                                    style: kSubTitleStyle.copyWith(
+                                        color: Colors.black),
+                                  ),
+                                  IconButton(
+                                      icon: FaIcon(
+                                        FontAwesomeIcons.calendar,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return CustomDatePicker();
+                                            }).then((value) {
+                                          setState(() {
+                                            if (value != null) {
+                                              selectedDate = value;
+                                            }
+                                          });
+                                        });
+                                      }),
+                                ],
+                              ),
+                            )),
                       ],
-                    )),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'TASK TIME',
+                          style: kSubTitleStyle.copyWith(
+                              fontSize: 15, color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            width: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Colors.black)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: Text(
+                                    selectedTime.format(context),
+                                    style: kSubTitleStyle.copyWith(
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                IconButton(
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.clock,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).push(showPicker(
+                                          is24HrFormat: true,
+                                          value: TimeOfDay.now(),
+                                          onChange: (TimeOfDay time) {
+                                            print(time);
+                                            setState(() {
+                                              selectedTime = time;
+                                            });
+                                          }));
+                                    }),
+                              ],
+                            )),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 LabelController.getLabelCount(context) > 0
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 35,
-                          ),
                           Text(
                             'LABEL',
-                            style: kSubTitleStyle.copyWith(fontSize: 15),
+                            style: kSubTitleStyle.copyWith(
+                                fontSize: 15, color: Colors.black),
                           ),
                           SizedBox(
                             height: 10,
@@ -190,43 +245,27 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 SizedBox(
                   height: 35,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RoundedButton(
-                      buttonColor: Colors.grey,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      buttonChild: Text('Cancel'),
-                      height: 50,
-                      width: 140,
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    RoundedButton(
-                      buttonColor: Colors.blueAccent,
-                      onPressed: () {
-                        TaskController.editTask(
-                            widget.task,
-                            Task(
-                                taskName: _nameController.text,
-                                taskDesc: _descriptionController.text,
-                                dueDate: DateTime(selectedDate.year,
-                                    selectedDate.month, selectedDate.day),
-                                label:
-                                    LabelController.getSelectedLabel(context)),
-                            context);
-                        LabelController.removeSelection(context);
-                        Navigator.pop(context);
-                      },
-                      buttonChild: Text('Edit'),
-                      height: 50,
-                      width: 140,
-                    ),
-                  ],
-                ),
+                Center(
+                  child: RoundedButton(
+                    buttonColor: Colors.blueAccent,
+                    onPressed: () {
+                      TaskController.editTask(
+                          widget.task,
+                          Task(
+                              taskDesc: _descriptionController.text,
+                              taskName: _nameController.text,
+                              dueDate: DateTime(selectedDate.year,
+                                  selectedDate.month, selectedDate.day),
+                              label: LabelController.getSelectedLabel(context)),
+                          context);
+                      LabelController.removeSelection(context);
+                      Navigator.pop(context);
+                    },
+                    buttonChild: Text('Edit'),
+                    height: 50,
+                    width: 250,
+                  ),
+                )
               ],
             ),
           ),

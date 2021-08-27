@@ -1,9 +1,10 @@
+import 'package:pocket_planner/models/class_models/label_model.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 
 class Project {
-  int projectId;
   List<Task> tasks;
   String projectName;
+  Label label;
 
-  Project({this.projectName, this.projectId, this.tasks});
+  Project({this.projectName, this.tasks, this.label});
 }

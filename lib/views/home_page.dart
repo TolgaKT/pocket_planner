@@ -5,7 +5,6 @@ import 'package:pocket_planner/constants.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 import 'package:pocket_planner/views/add_task_screen.dart';
 import 'package:pocket_planner/views/dashboard.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kColorMap['kMainWhite'],
       body: SafeArea(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,30 +43,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: ToggleSwitch(
-                  minWidth: 90.0,
-                  cornerRadius: 20.0,
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: Colors.grey,
-                  inactiveFgColor: Colors.white,
-                  initialLabelIndex: selectedStatusIndex,
-                  customTextStyles: [
-                    kSubTitleStyle.copyWith(fontSize: 16),
-                    kSubTitleStyle.copyWith(fontSize: 16)
-                  ],
-                  totalSwitches: 2,
-                  activeBgColor: [kColorMap['kLightBlue']],
-                  labels: ['Todo', 'Done'],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    setState(() {
-                      selectedStatusIndex = index;
-                    });
-                  },
-                ),
-              ),
             ],
           ),
           Padding(
@@ -75,13 +50,13 @@ class _HomePageState extends State<HomePage> {
                   left: 20.0, top: 20, bottom: 20, right: 20),
               child: Text(
                 'Today',
-                style: kTitleStyle.copyWith(fontSize: 26),
+                style: kTitleStyle.copyWith(fontSize: 26, color: Colors.black),
               )),
           Expanded(
               child: TaskList(
-                  selectedDate: DateTime(
-                      selectedDate.year, selectedDate.month, selectedDate.day),
-                  selectedStatus: statusList[selectedStatusIndex])),
+            selectedDate: DateTime(
+                selectedDate.year, selectedDate.month, selectedDate.day),
+          )),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0, left: 15, right: 15),
             child: Align(

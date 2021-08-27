@@ -138,10 +138,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     super.initState();
     setState(() {
       date = DateTime.now();
-      selectedDate = date;
+      selectedDate = DateTime(date.year, date.month, date.day);
+      print(selectedDate);
       dateTitle = '${months[date.month - 1]}, ${date.year}';
     });
-    print(selectedDate);
   }
 
   @override
