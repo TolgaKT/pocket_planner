@@ -110,7 +110,8 @@ class _TopCalendarState extends State<TopCalendar> {
                           backgroundColor:
                               days.values.toList()[weekDay - 1].day ==
                                       e.value.day
-                                  ? MaterialStateProperty.all(Colors.blueAccent)
+                                  ? MaterialStateProperty.all(
+                                      kColorMap['kMainPurple'])
                                   : MaterialStateProperty.all(Colors.white),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(

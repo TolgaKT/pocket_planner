@@ -30,7 +30,7 @@ class LabelTile extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: kColorMap['kBackgroundColor'],
+                  color: kColorMap['kGrey'].withOpacity(.5),
                   borderRadius: BorderRadius.circular(15)),
               height: 60,
               width: 600,

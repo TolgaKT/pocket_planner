@@ -13,9 +13,9 @@ class ProjectTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 120,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
+            color: kColorMap['kGrey'].withOpacity(.4)),
         child: Padding(
             padding: const EdgeInsets.only(
                 right: 20.0, left: 20, top: 15, bottom: 15),
@@ -31,36 +31,33 @@ class ProjectTile extends StatelessWidget {
                     : Container(),
                 Divider(
                   thickness: 1.5,
-                  color: kColorMap['kGrey'].withOpacity(.2),
+                  color: kColorMap['kGrey'],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Container(
-                          height: 37,
-                          width: 3,
-                          decoration: BoxDecoration(
-                              color: project.label != null
-                                  ? project.label.labelColor
-                                  : kColorMap['kGrey'],
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Container(
+                        height: 37,
+                        width: 3,
+                        decoration: BoxDecoration(
+                            color: project.label != null
+                                ? project.label.labelColor
+                                : kColorMap['kGrey'],
+                            borderRadius: BorderRadius.circular(12)),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            project.projectName,
-                            style: kTitleStyle.copyWith(
-                                color: Colors.black, fontSize: 18),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          project.projectName,
+                          style: kTitleStyle.copyWith(
+                              color: Colors.black, fontSize: 18),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ],
             )));

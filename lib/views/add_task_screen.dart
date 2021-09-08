@@ -237,7 +237,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 Center(
                   child: RoundedButton(
-                    buttonColor: Colors.blueAccent,
+                    buttonColor: kColorMap['kMainPurple'],
                     onPressed: () {
                       TaskController.createTask(
                           Task(

@@ -13,13 +13,16 @@ class Task {
   TimeOfDay taskTime;
   Label label;
   TaskStatus status;
-
+  bool shouldRemind;
+  bool isHabit;
   //use -1 for one time tasks
   int projectId;
 
   Task({
     this.projectId,
     this.label,
+    this.shouldRemind = false,
+    this.isHabit = false,
     this.taskDesc,
     this.taskTime,
     this.status = TaskStatus.pending,

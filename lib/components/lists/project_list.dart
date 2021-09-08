@@ -14,19 +14,21 @@ class _ProjectListState extends State<ProjectList> {
   Widget build(BuildContext context) {
     return Consumer<ProjectData>(
       builder: (context, projectData, child) {
-        return ListView.separated(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 20);
-          },
-          itemCount: projectData.projectsCount,
-          itemBuilder: (context, index) {
-            Project project = projectData.projects[index];
-            return ProjectTile(
-              project: project,
-            );
-          },
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: 121),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(width: 20);
+            },
+            itemCount: projectData.projectsCount,
+            itemBuilder: (context, index) {
+              Project project = projectData.projects[index];
+              return ProjectTile(
+                project: project,
+              );
+            },
+          ),
         );
       },
     );

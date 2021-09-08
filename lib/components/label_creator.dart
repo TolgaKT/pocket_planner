@@ -34,7 +34,7 @@ class _LabelCreatorState extends State<LabelCreator> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: kColorMap['kBackgroundColor']),
+        decoration: BoxDecoration(color: kColorMap['kMainWhite']),
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: Column(
@@ -42,7 +42,8 @@ class _LabelCreatorState extends State<LabelCreator> {
             children: [
               Text(
                 'LABEL NAME',
-                style: kSubTitleStyle.copyWith(fontSize: 15),
+                style:
+                    kSubTitleStyle.copyWith(fontSize: 15, color: Colors.black),
               ),
               SizedBox(
                 height: 10,
@@ -64,7 +65,7 @@ class _LabelCreatorState extends State<LabelCreator> {
                   hintStyle: TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
                 focusNode: _nameNode,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               SizedBox(
                 height: 35,

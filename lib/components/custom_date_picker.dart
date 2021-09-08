@@ -139,7 +139,6 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     setState(() {
       date = DateTime.now();
       selectedDate = DateTime(date.year, date.month, date.day);
-      print(selectedDate);
       dateTitle = '${months[date.month - 1]}, ${date.year}';
     });
   }
@@ -251,7 +250,6 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                     RoundedButton(
                       buttonColor: Colors.blueAccent,
                       onPressed: () {
-                        print(selectedDate);
                         Navigator.pop(context, selectedDate);
                       },
                       buttonChild: Text('Okay'),
