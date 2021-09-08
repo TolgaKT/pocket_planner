@@ -91,13 +91,25 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                         borderRadius: BorderRadius.circular(12)))),
                 onPressed: () {
                   setState(() {
-                    selectedDate = DateTime(
-                        date.year, date.month, index + 1 - emptyContainers);
+                    if (DateTime(DateTime.now().year, DateTime.now().month,
+                                DateTime.now().day)
+                            .compareTo(DateTime(date.year, date.month,
+                                index + 1 - emptyContainers)) <=
+                        0) {
+                      selectedDate = DateTime(
+                          date.year, date.month, index + 1 - emptyContainers);
+                    }
                   });
                 },
                 child: Text(
                   '${index + 1 - emptyContainers}',
-                  style: TextStyle(color: Colors.black),
+                  style: DateTime(DateTime.now().year, DateTime.now().month,
+                                  DateTime.now().day)
+                              .compareTo(DateTime(date.year, date.month,
+                                  index + 1 - emptyContainers)) <=
+                          0
+                      ? TextStyle(color: Colors.black)
+                      : TextStyle(color: Colors.grey),
                 ),
               ),
       );
