@@ -12,15 +12,18 @@ class LabelTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SlidableController controller = SlidableController();
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Slidable(
+        controller: controller,
         actionPane: SlidableDrawerActionPane(),
         actionExtentRatio: 0.25,
         secondaryActions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.trash),
             onPressed: () {
+              controller.activeState.close();
               LabelController.deleteLabel(label, context);
             },
             color: kColorMap['kMainRed'],
@@ -42,7 +45,8 @@ class LabelTile extends StatelessWidget {
                       height: 35,
                       width: 35,
                       decoration: BoxDecoration(
-                          color: label.labelColor, shape: BoxShape.circle),
+                          color: kColorMap[label.labelColor],
+                          shape: BoxShape.circle),
                       child: Icon(
                         Icons.label,
                         color: Colors.white,

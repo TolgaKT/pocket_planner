@@ -23,21 +23,24 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       backgroundColor: kColorMap['kMainWhite'],
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
-              child: TopCalendar(
-                parentAction: _updateDate,
-              )),
-          Expanded(
-            child: TaskList(
-              selectedDate: DateTime(
-                  selectedDate.year, selectedDate.month, selectedDate.day),
+          child: Padding(
+        padding: const EdgeInsets.only(left: 15.0, right: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: TopCalendar(
+                  parentAction: _updateDate,
+                )),
+            Expanded(
+              child: TaskList(
+                selectedDate: DateTime(
+                    selectedDate.year, selectedDate.month, selectedDate.day),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       )),
     );
   }

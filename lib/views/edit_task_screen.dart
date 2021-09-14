@@ -256,7 +256,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                               taskName: _nameController.text,
                               dueDate: DateTime(selectedDate.year,
                                   selectedDate.month, selectedDate.day),
-                              label: LabelController.getSelectedLabel(context)),
+                              labelId: LabelController.getSelectedLabel(context)
+                                  .labelId),
                           context);
                       LabelController.removeSelection(context);
                       Navigator.pop(context);

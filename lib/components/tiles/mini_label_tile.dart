@@ -26,7 +26,7 @@ class MiniLabelTile extends StatelessWidget {
                 color: LabelController.getSelectedLabel(context) == label
                     ? Colors.black
                     : kColorMap['kMainWhite']),
-            color: label.labelColor.withOpacity(.5),
+            color: kColorMap[label.labelColor].withOpacity(.5),
             borderRadius: BorderRadius.circular(15)),
         child: Center(
           child: Text(

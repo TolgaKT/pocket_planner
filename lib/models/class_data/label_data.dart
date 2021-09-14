@@ -14,6 +14,17 @@ class LabelData extends ChangeNotifier {
 
   UnmodifiableListView<Label> get labels => UnmodifiableListView(_labels);
 
+  void overwrite(List<Label> labels) {
+    _labels = labels;
+    notifyListeners();
+  }
+
+  Label getLabel(int id) {
+    return _labels.firstWhere((element) => element.labelId == id, orElse: () {
+      return null;
+    });
+  }
+
   void addLabel(Label label) {
     _labels.add(label);
     notifyListeners();

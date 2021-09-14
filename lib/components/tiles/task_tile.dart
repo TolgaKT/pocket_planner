@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pocket_planner/controllers/label_controller.dart';
 import 'package:pocket_planner/controllers/task_controller.dart';
+import 'package:pocket_planner/models/class_models/label_model.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 import 'package:pocket_planner/views/edit_task_screen.dart';
 
 import '../../constants.dart';
 
-class TaskTile extends StatelessWidget {
+class TaskTile extends StatefulWidget {
   final Task task;
   TaskTile({
     this.task,
   });
+
+  @override
+  _TaskTileState createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  Label label;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      label = LabelController.getLabelFromId(widget.task.labelId, context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +37,13 @@ class TaskTile extends StatelessWidget {
     return Slidable(
       controller: controller,
       closeOnScroll: true,
-      secondaryActions: task.status == TaskStatus.pending
+      secondaryActions: widget.task.status == TaskStatus.pending
           ? <Widget>[
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.trash),
                 onPressed: () {
                   controller.activeState.close();
-                  TaskController.deleteTask(task, context);
+                  TaskController.deleteTask(widget.task, context);
                 },
                 color: kColorMap['kMainRed'],
               ),
@@ -37,7 +55,7 @@ class TaskTile extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => EditTaskScreen(
-                                task: task,
+                                task: widget.task,
                               )));
                 },
                 color: kColorMap['kMainYellow'],
@@ -46,7 +64,7 @@ class TaskTile extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.check),
                 onPressed: () {
                   controller.activeState.close();
-                  TaskController.markAsComplete(task, context);
+                  TaskController.markAsComplete(widget.task, context);
                 },
                 color: kColorMap['kMainCyan'],
               ),
@@ -56,7 +74,7 @@ class TaskTile extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.undo),
                 onPressed: () {
                   controller.activeState.close();
-                  TaskController.undoFinished(task, context);
+                  TaskController.undoFinished(widget.task, context);
                 },
                 color: kColorMap['kMainYellow'],
               ),
@@ -66,8 +84,8 @@ class TaskTile extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: task.label != null
-                  ? task.label.labelColor.withOpacity(.4)
+              color: label != null
+                  ? kColorMap[label.labelColor].withOpacity(.4)
                   : kColorMap['kGrey'].withOpacity(.4)),
           child: Padding(
               padding: const EdgeInsets.only(
@@ -83,11 +101,11 @@ class TaskTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            task.taskName,
+                            widget.task.taskName,
                             style: kTitleStyle.copyWith(
                                 color: Colors.black, fontSize: 18),
                           ),
-                          task.status == TaskStatus.pending
+                          widget.task.status == TaskStatus.pending
                               ? Container()
                               : FaIcon(
                                   FontAwesomeIcons.solidCheckCircle,
@@ -99,7 +117,7 @@ class TaskTile extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        task.taskDesc,
+                        widget.task.taskDesc,
                         style: kSubTitleStyle.copyWith(
                             color: kColorMap['kGrey'], fontSize: 14),
                       ),
@@ -120,21 +138,21 @@ class TaskTile extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(task.taskTime.format(context)),
+                              Text(widget.task.taskTime.format(context)),
                             ],
                           ),
-                          task.label != null
+                          label != null
                               ? Container(
                                   height: 40,
                                   width: 80,
                                   child: Center(
                                     child: Text(
-                                      task.label.labelName,
+                                      label.labelName,
                                       style: kSubTitleStyle,
                                     ),
                                   ),
                                   decoration: BoxDecoration(
-                                      color: task.label.labelColor,
+                                      color: kColorMap[label.labelColor],
                                       borderRadius: BorderRadius.circular(15)),
                                 )
                               : Container()

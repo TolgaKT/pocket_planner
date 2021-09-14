@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_planner/components/tiles/label_tile.dart';
-import 'package:pocket_planner/models/class_data/label_data.dart';
+import 'package:pocket_planner/components/tiles/task_tile.dart';
+import 'package:pocket_planner/models/class_data/task_data.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants.dart';
+import '../constants.dart';
 
-class LabelList extends StatefulWidget {
+class HomeTaskList extends StatefulWidget {
+  final DateTime selectedDate;
+
+  HomeTaskList({this.selectedDate});
+
   @override
-  _LabelListState createState() => _LabelListState();
+  _HomeTaskListState createState() => _HomeTaskListState();
 }
 
-class _LabelListState extends State<LabelList> {
+class _HomeTaskListState extends State<HomeTaskList> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<LabelData>(
-      builder: (context, labelData, child) {
-        return labelData.labelCount > 0
+    return Consumer<TaskData>(
+      builder: (context, taskData, child) {
+        return taskData.getTaskCount(widget.selectedDate) > 0
             ? Column(
-                children: labelData.labels
-                    .map((e) => LabelTile(
-                          label: e,
+                children: taskData
+                    .getTasks(widget.selectedDate)
+                    .map((e) => TaskTile(
+                          task: e,
                         ))
                     .toList(),
               )
@@ -28,7 +33,7 @@ class _LabelListState extends State<LabelList> {
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                     child: Text(
-                  '''You don't have any labels''',
+                  '''You don't have any tasks today''',
                   style: kSubTitleStyle.copyWith(
                       fontSize: 18, color: Colors.black),
                 )),

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pocket_planner/components/rounded_button.dart';
+import 'package:pocket_planner/constants.dart';
 
 const double _kDayPickerRowHeight = 42.0;
 const int _kMaxDayPickerRowCount = 6; // A 31 day month that starts on Saturday.
@@ -85,22 +86,22 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                     backgroundColor: selectedDate ==
                             DateTime(date.year, date.month,
                                 index + 1 - emptyContainers)
-                        ? MaterialStateProperty.all(Colors.blueAccent)
+                        ? MaterialStateProperty.all(kColorMap['kMainPurple'])
                         : MaterialStateProperty.all(Colors.white),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)))),
-                onPressed: () {
-                  setState(() {
-                    if (DateTime(DateTime.now().year, DateTime.now().month,
+                onPressed: DateTime(DateTime.now().year, DateTime.now().month,
                                 DateTime.now().day)
                             .compareTo(DateTime(date.year, date.month,
                                 index + 1 - emptyContainers)) <=
-                        0) {
-                      selectedDate = DateTime(
-                          date.year, date.month, index + 1 - emptyContainers);
-                    }
-                  });
-                },
+                        0
+                    ? () {
+                        setState(() {
+                          selectedDate = DateTime(date.year, date.month,
+                              index + 1 - emptyContainers);
+                        });
+                      }
+                    : null,
                 child: Text(
                   '${index + 1 - emptyContainers}',
                   style: DateTime(DateTime.now().year, DateTime.now().month,

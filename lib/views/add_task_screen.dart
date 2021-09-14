@@ -84,7 +84,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'TASK TITLE',
+                  'Task Title',
                   style: kSubTitleStyle.copyWith(
                       fontSize: 15, color: Colors.black),
                 ),
@@ -96,9 +96,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   height: 35,
                 ),
                 Text(
-                  'TASK DESCRIPTION',
+                  'Task Description',
                   style: kSubTitleStyle.copyWith(
                       fontSize: 15, color: Colors.black),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 CustomTextField(
                     node: _descriptionNode, controller: _descriptionController),
@@ -196,7 +199,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                           is24HrFormat: true,
                                           value: TimeOfDay.now(),
                                           onChange: (TimeOfDay time) {
-                                            print(time);
                                             setState(() {
                                               selectedTime = time;
                                             });
@@ -246,7 +248,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               taskName: _nameController.text,
                               dueDate: DateTime(selectedDate.year,
                                   selectedDate.month, selectedDate.day),
-                              label: LabelController.getSelectedLabel(context)),
+                              labelId: LabelController.getSelectedLabel(
+                                          context) !=
+                                      null
+                                  ? LabelController.getSelectedLabel(context)
+                                      .labelId
+                                  : -1),
                           context);
                       LabelController.removeSelection(context);
                       Navigator.pop(context);

@@ -1,25 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:pocket_planner/models/class_models/label_model.dart';
 import 'package:pocket_planner/models/class_models/project_model.dart';
 import 'package:pocket_planner/models/class_models/task_model.dart';
 
 class ProjectData extends ChangeNotifier {
-  List<Project> _projects = [
-    Project(
-        tasks: [Task(), Task()],
-        projectName: 'Web UI design',
-        label: Label(labelColor: Colors.yellow, labelName: 'Deneme')),
-    Project(
-      tasks: [Task(), Task()],
-      projectName: 'Web UI design',
-    ),
-    Project(
-        tasks: [Task(), Task()],
-        projectName: 'Web UI design',
-        label: Label(labelColor: Colors.yellow, labelName: 'Deneme')),
-  ];
+  List<Project> _projects = [];
 
   UnmodifiableListView<Project> get projects => UnmodifiableListView(_projects);
 

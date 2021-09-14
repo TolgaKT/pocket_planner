@@ -32,7 +32,7 @@ class TaskData extends ChangeNotifier {
     if (newTask.taskDesc != null) {
       foundTask.taskDesc = newTask.taskDesc;
     }
-    foundTask.label = newTask.label;
+    foundTask.labelId = newTask.labelId;
     notifyListeners();
   }
 

@@ -20,22 +20,20 @@ class _TaskListState extends State<TaskList> {
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
-        return Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 15,
-              );
-            },
-            itemCount: taskData.getTaskCount(widget.selectedDate),
-            itemBuilder: (context, index) {
-              Task task = taskData.getTasks(widget.selectedDate)[index];
-              return TaskTile(
-                task: task,
-              );
-            },
-          ),
+        return ListView.separated(
+          shrinkWrap: true,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 15,
+            );
+          },
+          itemCount: taskData.getTaskCount(widget.selectedDate),
+          itemBuilder: (context, index) {
+            Task task = taskData.getTasks(widget.selectedDate)[index];
+            return TaskTile(
+              task: task,
+            );
+          },
         );
       },
     );

@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pocket_planner/constants.dart';
 import 'package:pocket_planner/views/add_task_screen.dart';
 import 'package:pocket_planner/views/calendar_screen.dart';
-import 'package:pocket_planner/views/dashboard.dart';
 import 'package:pocket_planner/views/home_screen.dart';
 
 class HomeView extends StatefulWidget {
@@ -18,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
     CalendarScreen(),
     Container(),
     Container(),
-    Dashboard(),
+    Container()
   ];
 
   @override
@@ -60,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.book), label: 'Projects'),
             BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.cog), label: 'Settings'),
+                icon: FaIcon(FontAwesomeIcons.chartLine), label: 'Statistics'),
           ],
         ),
       ),

@@ -26,7 +26,8 @@ class ProjectTile extends StatelessWidget {
                     ? Text(
                         project.label.labelName,
                         style: kSubTitleStyle.copyWith(
-                            color: project.label.labelColor, fontSize: 16),
+                            color: kColorMap[project.label.labelColor],
+                            fontSize: 16),
                       )
                     : Container(),
                 Divider(
