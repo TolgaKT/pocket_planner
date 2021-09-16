@@ -248,16 +248,22 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 Center(
                   child: RoundedButton(
                     buttonColor: Colors.blueAccent,
-                    onPressed: () {
-                      TaskController.editTask(
+                    onPressed: () async {
+                      await TaskController.editTask(
                           widget.task,
                           Task(
+                              taskId: widget.task.taskId,
+                              taskTime: selectedTime,
                               taskDesc: _descriptionController.text,
                               taskName: _nameController.text,
                               dueDate: DateTime(selectedDate.year,
                                   selectedDate.month, selectedDate.day),
-                              labelId: LabelController.getSelectedLabel(context)
-                                  .labelId),
+                              labelId: LabelController.getSelectedLabel(
+                                          context) !=
+                                      null
+                                  ? LabelController.getSelectedLabel(context)
+                                      .labelId
+                                  : -1),
                           context);
                       LabelController.removeSelection(context);
                       Navigator.pop(context);

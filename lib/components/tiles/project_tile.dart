@@ -19,48 +19,6 @@ class ProjectTile extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.only(
                 right: 20.0, left: 20, top: 15, bottom: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                project.label != null
-                    ? Text(
-                        project.label.labelName,
-                        style: kSubTitleStyle.copyWith(
-                            color: kColorMap[project.label.labelColor],
-                            fontSize: 16),
-                      )
-                    : Container(),
-                Divider(
-                  thickness: 1.5,
-                  color: kColorMap['kGrey'],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Container(
-                        height: 37,
-                        width: 3,
-                        decoration: BoxDecoration(
-                            color: project.label != null
-                                ? project.label.labelColor
-                                : kColorMap['kGrey'],
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          project.projectName,
-                          style: kTitleStyle.copyWith(
-                              color: Colors.black, fontSize: 18),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            )));
+            child: Text(project.projectName)));
   }
 }

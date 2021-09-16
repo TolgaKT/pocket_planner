@@ -240,8 +240,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 Center(
                   child: RoundedButton(
                     buttonColor: kColorMap['kMainPurple'],
-                    onPressed: () {
-                      TaskController.createTask(
+                    onPressed: () async {
+                      await TaskController.createTask(
                           Task(
                               taskTime: selectedTime,
                               taskDesc: _descriptionController.text,

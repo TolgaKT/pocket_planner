@@ -55,7 +55,7 @@ class Task {
       'taskName': taskName,
       'taskDesc': taskDesc,
       'dueDate': dueDate.toString(),
-      'taskTime': taskTime.toString(),
+      'taskTime': taskTime.toString().substring(10, 15),
       'labelId': labelId,
       'status': status == TaskStatus.finished ? 1 : 0,
       'shouldRemind': shouldRemind ? 1 : 0,

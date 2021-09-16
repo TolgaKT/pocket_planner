@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/controllers/label_controller.dart';
+import 'package:pocket_planner/controllers/task_controller.dart';
 import 'package:pocket_planner/views/home_view.dart';
 
 class CustomSplash extends StatefulWidget {
@@ -8,15 +9,16 @@ class CustomSplash extends StatefulWidget {
 }
 
 class _CustomSplashState extends State<CustomSplash> {
-  Future<void> getLabels() async {
-    LabelController.getLabels(context);
+  Future<void> getData() async {
+    await LabelController.getLabels(context);
+    await TaskController.getTasks(context);
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getLabels().whenComplete(() {
+    getData().whenComplete(() {
       Navigator.pop(context);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomeView()));

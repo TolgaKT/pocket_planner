@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/models/class_models/project_model.dart';
-import 'package:pocket_planner/models/class_models/task_model.dart';
 
 class ProjectData extends ChangeNotifier {
   List<Project> _projects = [];
@@ -11,20 +10,33 @@ class ProjectData extends ChangeNotifier {
 
   int get projectsCount => _projects.length;
 
+  void overwrite(List<Project> projects) {
+    _projects = projects;
+    notifyListeners();
+  }
+
   int getProjectTasks(Project project) {
-    return _projects.firstWhere((element) => element == project).tasks.length;
+    return _projects.firstWhere((element) => element == project).taskIds.length;
   }
 
-  int getFinishedTasks(Project project) {
-    return _projects
-        .firstWhere((element) => element == project)
-        .tasks
-        .where((element) => element.status == TaskStatus.finished)
-        .length;
-  }
-
-  void addProjects(Project project) {
+  void addProject(Project project) {
     _projects.add(project);
+    notifyListeners();
+  }
+
+  void addTask(Project project, int taskId) {
+    _projects
+        .firstWhere((element) => element.projectId == project.projectId)
+        .taskIds
+        .add(taskId);
+    notifyListeners();
+  }
+
+  void deleteTask(Project project, int taskId) {
+    _projects
+        .firstWhere((element) => element.projectId == project.projectId)
+        .taskIds
+        .remove(taskId);
     notifyListeners();
   }
 

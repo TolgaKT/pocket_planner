@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_planner/db/database.dart';
+import 'package:pocket_planner/db/label_db.dart';
 import 'package:pocket_planner/models/class_data/label_data.dart';
 import 'package:pocket_planner/models/class_models/label_model.dart';
 import 'package:provider/provider.dart';
 
 class LabelController {
-  static void getLabels(BuildContext context) async {
-    List<Label> labels = await MainDatabase.instance.getAllLabels();
+  static Future<void> getLabels(BuildContext context) async {
+    List<Label> labels = await LabelDB.getAllLabels();
     Provider.of<LabelData>(context, listen: false).overwrite(labels);
   }
 
@@ -15,12 +15,12 @@ class LabelController {
   }
 
   static void createLabel(Label label, BuildContext context) async {
-    Label newLabel = await MainDatabase.instance.createLabel(label);
+    Label newLabel = await LabelDB.createLabel(label);
     Provider.of<LabelData>(context, listen: false).addLabel(newLabel);
   }
 
   static void deleteLabel(Label label, BuildContext context) async {
-    await MainDatabase.instance.deleteLabel(label);
+    await LabelDB.deleteLabel(label);
     Provider.of<LabelData>(context, listen: false).deleteLabel(label);
   }
 

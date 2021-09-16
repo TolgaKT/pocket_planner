@@ -20,13 +20,8 @@ class _TaskListState extends State<TaskList> {
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
-        return ListView.separated(
+        return ListView.builder(
           shrinkWrap: true,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              height: 15,
-            );
-          },
           itemCount: taskData.getTaskCount(widget.selectedDate),
           itemBuilder: (context, index) {
             Task task = taskData.getTasks(widget.selectedDate)[index];

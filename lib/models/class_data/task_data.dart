@@ -20,19 +20,14 @@ class TaskData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editTask(Task task, Task newTask) {
-    Task foundTask = _tasks.firstWhere((element) => element == task);
+  void overwrite(List<Task> tasks) {
+    _tasks = tasks;
+    notifyListeners();
+  }
 
-    if (newTask.taskName != null) {
-      foundTask.taskName = newTask.taskName;
-    }
-    if (newTask.dueDate != null) {
-      foundTask.dueDate = newTask.dueDate;
-    }
-    if (newTask.taskDesc != null) {
-      foundTask.taskDesc = newTask.taskDesc;
-    }
-    foundTask.labelId = newTask.labelId;
+  void editTask(Task task, Task newTask) {
+    _tasks[_tasks.indexWhere((element) => element.taskId == task.taskId)] =
+        newTask;
     notifyListeners();
   }
 

@@ -1,10 +1,29 @@
-import 'package:pocket_planner/models/class_models/label_model.dart';
-import 'package:pocket_planner/models/class_models/task_model.dart';
-
 class Project {
-  List<Task> tasks;
+  List<int> taskIds;
   String projectName;
-  Label label;
+  int labelId;
+  int projectId;
 
-  Project({this.projectName, this.tasks, this.label});
+  Project(
+      {this.projectName,
+      this.taskIds = const [],
+      this.labelId,
+      this.projectId});
+
+  factory Project.fromDB(Map<String, dynamic> json) {
+    return Project(
+        projectName: json['projectName'],
+        projectId: json['projectId'],
+        labelId: json['labelId'],
+        taskIds: json['taskIds'].split(',').map((e) => int.parse(e)).toList());
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'projectId': projectId,
+      'labelId': labelId,
+      'projectName': projectName,
+      'taskIds': taskIds.join(',')
+    };
+  }
 }

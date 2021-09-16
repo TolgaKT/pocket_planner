@@ -4,6 +4,7 @@ import 'package:pocket_planner/constants.dart';
 import 'package:pocket_planner/views/add_task_screen.dart';
 import 'package:pocket_planner/views/calendar_screen.dart';
 import 'package:pocket_planner/views/home_screen.dart';
+import 'package:pocket_planner/views/projects_screen.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
     HomeScreen(),
     CalendarScreen(),
     Container(),
-    Container(),
+    ProjectsScreen(),
     Container()
   ];
 
