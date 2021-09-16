@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/controllers/label_controller.dart';
+import 'package:pocket_planner/controllers/project_controller.dart';
 import 'package:pocket_planner/controllers/task_controller.dart';
 import 'package:pocket_planner/views/home_view.dart';
 
@@ -12,6 +13,7 @@ class _CustomSplashState extends State<CustomSplash> {
   Future<void> getData() async {
     await LabelController.getLabels(context);
     await TaskController.getTasks(context);
+    await ProjectController.getProjects(context);
   }
 
   @override

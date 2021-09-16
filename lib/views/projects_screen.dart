@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/components/lists/project_list.dart';
+import 'package:pocket_planner/components/project_creator.dart';
 
 import '../constants.dart';
 
@@ -19,6 +20,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '''Ongoing Projects''',

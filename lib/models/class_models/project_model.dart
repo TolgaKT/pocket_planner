@@ -4,18 +4,16 @@ class Project {
   int labelId;
   int projectId;
 
-  Project(
-      {this.projectName,
-      this.taskIds = const [],
-      this.labelId,
-      this.projectId});
+  Project({this.projectName, this.taskIds, this.labelId, this.projectId});
 
   factory Project.fromDB(Map<String, dynamic> json) {
     return Project(
         projectName: json['projectName'],
         projectId: json['projectId'],
         labelId: json['labelId'],
-        taskIds: json['taskIds'].split(',').map((e) => int.parse(e)).toList());
+        taskIds: json['taskIds'] != ''
+            ? json['taskIds'].split(',').map((e) => int.parse(e)).toList()
+            : []);
   }
 
   Map<String, dynamic> toJson() {

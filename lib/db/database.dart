@@ -50,10 +50,10 @@ class MainDatabase {
 
     await db.execute('''
     CREATE TABLE projects (
-    projectId $idType
+    projectId $idType,
     projectName $textType,
     labelId $intType,
-    taskIds $textType,
+    taskIds $textType
     )
     ''');
   }
